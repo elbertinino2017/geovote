@@ -9,6 +9,6 @@ public class TtApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TtApplication.class, args);
 		
-		int j =0;
+		int i =0;
 	}
 }
