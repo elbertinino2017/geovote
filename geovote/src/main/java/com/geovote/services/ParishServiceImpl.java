@@ -1,0 +1,28 @@
+package com.geovote.services;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.geovote.data.ParishDao;
+import com.geovote.domain.Parish;
+
+@Service
+@Transactional
+public class ParishServiceImpl implements ParishService {
+
+	@Autowired
+	ParishDao dao;
+
+	@Override
+	public void createNewParish(Parish newParish) {
+		dao.create(newParish);
+	}
+
+	@Override
+	public void deleteExistingDistrict(Parish parishToDelete) {
+		dao.delete(parishToDelete);
+	}
+
+}

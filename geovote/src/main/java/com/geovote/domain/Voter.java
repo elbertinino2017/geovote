@@ -86,4 +86,33 @@ public class Voter implements Serializable {
 		return serialVersionUID;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((resgistrationId == null) ? 0 : resgistrationId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Voter other = (Voter) obj;
+		if (resgistrationId == null) {
+			if (other.resgistrationId != null)
+				return false;
+		} else if (!resgistrationId.equals(other.resgistrationId))
+			return false;
+		return true;
+	}
+	
+	
+	
+	
+
 }
