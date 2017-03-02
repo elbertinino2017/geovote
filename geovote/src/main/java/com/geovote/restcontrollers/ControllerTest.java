@@ -7,17 +7,15 @@ import com.geovote.domain.DomainTest;
 
 @RestController
 public class ControllerTest {
-	
-	
+
 	@RequestMapping("/home")
-	public DomainTest myAppInfo()
-	{
+	public DomainTest myAppInfo() {
 		DomainTest domainTest = new DomainTest();
-		
+
 		domainTest.setAppName("Geovote");
 		domainTest.setAuthor("Felicien Fotio");
 		domainTest.setGreet("Bonjour");
-		
+
 		return domainTest;
 	}
 
