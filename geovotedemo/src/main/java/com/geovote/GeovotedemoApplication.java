@@ -9,5 +9,6 @@ public class GeovotedemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GeovotedemoApplication.class, args);
 		int i = 0;
+		int j = 0;
 	}
 }
