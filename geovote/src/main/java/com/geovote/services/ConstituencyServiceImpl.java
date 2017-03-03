@@ -1,5 +1,7 @@
 package com.geovote.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,11 @@ public class ConstituencyServiceImpl implements ConstituencyService {
 	@Override
 	public void deleteExistingConstituency(Constituency constituency) {
 		dao.delete(constituency);		
+	}
+
+	@Override
+	public List<Constituency> retrieveAllConstituencies() {
+		return dao.allConstituencies();
 	}
 
 }

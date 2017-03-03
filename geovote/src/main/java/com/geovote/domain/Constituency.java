@@ -15,40 +15,33 @@ import javax.persistence.OneToMany;
 public class Constituency {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String constituencyId;
 	private String code;
 	private String name;
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="CONSTITUENCY_FK_ID")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CONSTITUENCY_FK_ID")
 	private Set<SubCounty> subCounties;
 	
-	
-	
+	public Constituency() {}
+
+
 	public Constituency(String constituencyId, String code, String name, Set<SubCounty> subCounties) {
 		super();
 		this.constituencyId = constituencyId;
 		this.code = code;
 		this.name = name;
-		this.subCounties = new HashSet<SubCounty> (subCounties);
+		this.subCounties = new HashSet<SubCounty>(subCounties);
 	}
-	
-	
-
-
 
 	public Constituency(String constituencyId, String code, String name) {
 		super();
 		this.constituencyId = constituencyId;
 		this.code = code;
 		this.name = name;
-		this.subCounties = new HashSet<SubCounty> ();
+		this.subCounties = new HashSet<SubCounty>();
 	}
-
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -57,8 +50,6 @@ public class Constituency {
 		result = prime * result + ((constituencyId == null) ? 0 : constituencyId.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -76,11 +67,37 @@ public class Constituency {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public String getConstituencyId() {
+		return constituencyId;
+	}
+
+	public void setConstituencyId(String constituencyId) {
+		this.constituencyId = constituencyId;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<SubCounty> getSubCounties() {
+		return subCounties;
+	}
+
+	public void setSubCounties(Set<SubCounty> subCounties) {
+		this.subCounties = subCounties;
+	}
+
 }

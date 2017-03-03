@@ -25,6 +25,13 @@ public class PollingStation {
 	private Set<Voter> voters;
 	
 	
+	
+	
+	public PollingStation() {}
+
+
+
+
 	public PollingStation(String pollingStationId, String code, String name, Set<Voter> voters) {
 		super();
 		this.pollingStationId = pollingStationId;
@@ -72,6 +79,62 @@ public class PollingStation {
 		} else if (!pollingStationId.equals(other.pollingStationId))
 			return false;
 		return true;
+	}
+
+
+
+
+	public String getPollingStationId() {
+		return pollingStationId;
+	}
+
+
+
+
+	public void setPollingStationId(String pollingStationId) {
+		this.pollingStationId = pollingStationId;
+	}
+
+
+
+
+	public String getCode() {
+		return code;
+	}
+
+
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+
+	public Set<Voter> getVoters() {
+		return voters;
+	}
+
+
+
+
+	public void setVoters(Set<Voter> voters) {
+		this.voters = voters;
 	}
 	
 	

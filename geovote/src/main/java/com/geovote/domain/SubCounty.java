@@ -27,6 +27,8 @@ public class SubCounty {
 	
 	
 	
+	public SubCounty() {}
+
 	public SubCounty(String subCountyId, String code, String name, Set<Parish> parishes) {
 		super();
 		this.subCountyId = subCountyId;
@@ -81,9 +83,42 @@ public class SubCounty {
 			return false;
 		return true;
 	}
+
+	public String getSubCountyId() {
+		return subCountyId;
+	}
+
+	public void setSubCountyId(String subCountyId) {
+		this.subCountyId = subCountyId;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<Parish> getParishes() {
+		return parishes;
+	}
+
+	public void setParishes(Set<Parish> parishes) {
+		this.parishes = parishes;
+	}
 	
 	
-	//
+	
+	
 	
 
 }

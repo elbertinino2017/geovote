@@ -8,14 +8,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.geovote.domain.Voter;
 
 @XmlRootElement(name = "voters")
-public class VotersRepresentation {
+public class VotersCollectionRepresentation {
 
 	private List<Voter> voters;
 
-	public VotersRepresentation() {
+	public VotersCollectionRepresentation() {
 	}
 
-	public VotersRepresentation(List<Voter> voters) {
+	public VotersCollectionRepresentation(List<Voter> voters) {
 		this.voters = voters;
 	}
 

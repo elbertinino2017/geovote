@@ -1,5 +1,7 @@
 package com.geovote.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,11 @@ public class SubCountyServiceImpl implements SubCountyService {
 	@Override
 	public void deleteExistingSubCounty(SubCounty subCountyToDelete) {
 		dao.delete(subCountyToDelete);
+	}
+
+	@Override
+	public List<SubCounty> retrieveAllSubCounties() {
+		return dao.allSubCountyes();
 	}
 
 }

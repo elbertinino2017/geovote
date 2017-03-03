@@ -1,5 +1,7 @@
 package com.geovote.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -26,6 +28,12 @@ public class SubCounTyDaoJpaImpl implements SubCountyDao {
 	public void delete(SubCounty subCounty) {
 
 		em.remove(subCounty);
+	}
+
+	@Override
+	public List<SubCounty> allSubCountyes() {
+		
+		return em.createQuery("select subCounty from SubCounty as subCounty", SubCounty.class).getResultList();
 	}
 
 }

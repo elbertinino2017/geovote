@@ -13,40 +13,36 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Parish {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String parishId;
 	private String code;
-	private String name; 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="PARISH_FK_ID")
+	private String name;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "PARISH_FK_ID")
 	private Set<PollingStation> pollingStations;
-	
-	
+
+	public Parish() {
+	}
+
 	public Parish(String parishId, String code, String name, Set<PollingStation> pollingStations) {
 		super();
 		this.parishId = parishId;
 		this.code = code;
 		this.name = name;
-		this.pollingStations = new HashSet<PollingStation> (pollingStations); 
+		this.pollingStations = new HashSet<PollingStation>(pollingStations);
 	}
-
-	
-	
 
 	public Parish(String parishId, String code, String name) {
 		super();
 		this.parishId = parishId;
 		this.code = code;
 		this.name = name;
-		this.pollingStations = new HashSet<PollingStation> (); 
+		this.pollingStations = new HashSet<PollingStation>();
 
 	}
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -55,7 +51,6 @@ public class Parish {
 		result = prime * result + ((parishId == null) ? 0 : parishId.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -73,9 +68,37 @@ public class Parish {
 			return false;
 		return true;
 	}
-	
 
-	
-	
+	public String getParishId() {
+		return parishId;
+	}
+
+	public void setParishId(String parishId) {
+		this.parishId = parishId;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<PollingStation> getPollingStations() {
+		return pollingStations;
+	}
+
+	public void setPollingStations(Set<PollingStation> pollingStations) {
+		this.pollingStations = pollingStations;
+	}
 
 }
