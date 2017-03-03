@@ -10,5 +10,6 @@ public interface PollingStationDao {
 	public void delete(PollingStation pollingStation);
 	public List<PollingStation> allPollingStations();
 	public PollingStation getPollingStationByCode(String pollingStationCode);
+	public void update(PollingStation pollingStationToUpdate);
 
 }

@@ -34,4 +34,10 @@ public class ConstituencyServiceImpl implements ConstituencyService {
 		return dao.allConstituencies();
 	}
 
+	@Override
+	public Constituency findConstituencyByCode(String code) {
+		
+		return dao.getConstituencyByCode(code);
+	}
+
 }

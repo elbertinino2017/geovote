@@ -12,4 +12,6 @@ public interface ConstituencyDao {
 
 	public List<Constituency> allConstituencies();
 
+	public Constituency getConstituencyByCode(String code);
+
 }

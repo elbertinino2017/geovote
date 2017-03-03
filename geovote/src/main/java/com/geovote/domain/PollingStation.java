@@ -124,4 +124,14 @@ public class PollingStation {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "PollingStation [id=" + id + ", code=" + code + ", name=" + name + ", totalVoters=" + totalVoters
+				+ ", managerName=" + managerName + ", address=" + address + ", latitude=" + latitude + ", longitude="
+				+ longitude + "]";
+	}
+	
+	
+	
+
 }

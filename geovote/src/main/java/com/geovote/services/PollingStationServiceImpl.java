@@ -33,4 +33,10 @@ public class PollingStationServiceImpl implements PollingStationService {
 		return dao.allPollingStations();
 	}
 
+	@Override
+	public void updatePollingStation(PollingStation pollingStationToUpdate) {
+
+		dao.update(pollingStationToUpdate);
+	}
+
 }

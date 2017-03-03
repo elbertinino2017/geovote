@@ -37,4 +37,12 @@ public class DistrictDaoJpaImpl implements DistrictDao{
 				.getResultList();
 	}
 
+	@Override
+	public District getDistrictByCode(String code) {
+		
+		return em.createQuery("select district from District as district where district.code=:code", District.class)
+				.setParameter("code", code)
+				.getSingleResult();
+	}
+
 }

@@ -35,4 +35,12 @@ public class ConstituencyDaoJpaImpl implements ConstituencyDao {
 
 	}
 
+	@Override
+	public Constituency getConstituencyByCode(String code) {
+		
+		return em.createQuery("select constituency from Constituency as constituency where constituency.code =:code", Constituency.class)
+				.setParameter("code", code)
+				.getSingleResult();
+	}
+
 }

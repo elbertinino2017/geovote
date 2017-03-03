@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.geovote.domain.Parish;
 import com.geovote.domain.SubCounty;
 
 

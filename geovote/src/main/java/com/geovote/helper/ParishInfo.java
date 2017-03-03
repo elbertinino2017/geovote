@@ -1,11 +1,14 @@
 package com.geovote.helper;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class ParishInfo {
 
+	@Column(nullable=false)
 	private String parishCode;
+	@Column(nullable=false)
 	private String parishName;
 
 	public ParishInfo() {

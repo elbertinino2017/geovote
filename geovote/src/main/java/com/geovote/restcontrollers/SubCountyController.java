@@ -26,16 +26,14 @@ public class SubCountyController {
 
 		return new SubCountyCollectionRepresentation(allSubCounties);
 	}
-	
-	
+
 	@RequestMapping(value = "/subcounty/{code}", method = RequestMethod.GET)
 	public SubCounty subCountiesCode(@PathVariable String code) {
 
-		return   subCountyService.findSubCountyByCode(code);
+		return subCountyService.findSubCountyByCode(code);
 
 	}
-	
-	
+
 	@RequestMapping(value = "/subcounty/{code}/parishes", method = RequestMethod.GET)
 	public ParishesCollectionRepresentation subCountiesParishesBySubCountyCode(@PathVariable String code) {
 

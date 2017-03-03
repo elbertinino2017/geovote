@@ -63,15 +63,20 @@ public class GeovoteApplication {
 		HashSet<Constituency> constL1 = new HashSet<Constituency>();
 		constL1.add(c1);
 		constL1.add(c2);
-		constL1.add(c3);
-		constL1.add(c4);
+		
+		HashSet<Constituency> constL2 = new HashSet<Constituency>();
+		constL2.add(c3);
+		constL2.add(c4);
 		
 
 		
 		District di1 = new District("dist_1", "district_1", constL1);
+		District di2 = new District("dist_2", "district_2", constL2);
+
 		
 		
 		districtService.createNewDistrict(di1);
+		districtService.createNewDistrict(di2);
 		
 
 		
@@ -97,11 +102,10 @@ public class GeovoteApplication {
 		voterService.createNewVoter(vo4);
 		
 		
+
 		
-/*		Voter vo5 = new Voter("VOTER_5", "Chalene Melacheo", "Touboro", "F");
-		Voter vo6 = new Voter("VOTER_6", "Didier Nkalla", "Douala", "M");
-		Voter vo7 = new Voter("VOTER_7", "Felicien Fotio", "Dschang", "M");
-		Voter vo8 = new Voter("VOTER_8", "Megan Hess", "Denver", "F");*/
+		
+
 
 
 	}

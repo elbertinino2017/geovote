@@ -1,11 +1,14 @@
 package com.geovote.helper;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class ConstituencyInfo {
 
+	@Column(nullable=false)
 	private String constituencyCode;
+	@Column(nullable=false)
 	private String constituencyName;
 
 	public ConstituencyInfo() {

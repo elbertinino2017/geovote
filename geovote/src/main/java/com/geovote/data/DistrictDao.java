@@ -9,6 +9,7 @@ public interface DistrictDao {
 	public void create(District district);
 	public void delete(District district);
 	public List<District> allDistricts();
+	public District getDistrictByCode(String code);
 	
 
 }

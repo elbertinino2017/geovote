@@ -1,11 +1,14 @@
 package com.geovote.helper;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class SubCountyInfo {
 
+	@Column(nullable=false)
 	private String subCountyCode;
+	@Column(nullable=false)
 	private String subCountyName;
 
 	public SubCountyInfo() {

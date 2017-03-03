@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.geovote.domain.PollingStation;
 import com.geovote.domain.Voter;
 
 @Repository

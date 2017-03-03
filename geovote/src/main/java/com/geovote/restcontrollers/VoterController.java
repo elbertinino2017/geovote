@@ -26,21 +26,19 @@ public class VoterController {
 
 		return new VotersCollectionRepresentation(allVoters);
 	}
-	
+
 	@RequestMapping(value = "/voter/{voterid}", method = RequestMethod.GET)
-	public Voter findVoterById(@PathVariable String voterid){
-		
+	public Voter findVoterById(@PathVariable String voterid) {
+
 		return voterService.findVoterByVoterId(voterid);
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/voter/{voterid}/pollingstation", method = RequestMethod.GET)
-	public PollingStation findVoterPollingStation(@PathVariable String voterid){
-		
+	public PollingStation findVoterPollingStation(@PathVariable String voterid) {
+
 		return voterService.findVotersPollingStation(voterid);
-		
+
 	}
-	
 
 }

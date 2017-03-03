@@ -49,4 +49,10 @@ public class PolligStationDoaImpl implements PollingStationDao {
 		return pollingStation;
 	}
 
+	@Override
+	public void update(PollingStation pollingStationToUpdate) {
+
+		em.merge(pollingStationToUpdate);
+	}
+
 }

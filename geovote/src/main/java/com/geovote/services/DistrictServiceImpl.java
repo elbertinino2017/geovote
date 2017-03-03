@@ -1,4 +1,4 @@
-package com.geovote.services;
+ package com.geovote.services;
 
 import java.util.List;
 
@@ -34,6 +34,12 @@ public class DistrictServiceImpl implements DistrictService {
 	public List<District> retrieveAllDistricts() {
 
 		return dao.allDistricts();
+	}
+
+	@Override
+	public District findDistrictByCode(String code) {
+		
+		return dao.getDistrictByCode(code);
 	}
 
 }

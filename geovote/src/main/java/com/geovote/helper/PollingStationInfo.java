@@ -1,11 +1,14 @@
 package com.geovote.helper;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class PollingStationInfo {
 
+	@Column(nullable=false)
 	private String pollingStationCode;
+	@Column(nullable=false)
 	private String pollingStationName;
 
 	public PollingStationInfo() {
