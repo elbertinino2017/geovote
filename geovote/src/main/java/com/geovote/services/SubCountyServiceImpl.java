@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geovote.data.SubCountyDao;
+import com.geovote.domain.Parish;
 import com.geovote.domain.SubCounty;
 
 @Service
@@ -32,5 +33,14 @@ public class SubCountyServiceImpl implements SubCountyService {
 	public List<SubCounty> retrieveAllSubCounties() {
 		return dao.allSubCountyes();
 	}
+
+
+	@Override
+	public SubCounty findSubCountyByCode(String code) {
+		
+		return dao.getSubCountyByCode(code);
+	}
+
+	
 
 }

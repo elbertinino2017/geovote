@@ -13,6 +13,7 @@ import com.geovote.domain.PollingStation;
 import com.geovote.domain.SubCounty;
 import com.geovote.domain.Voter;
 import com.geovote.services.DistrictService;
+import com.geovote.services.VoterService;
 
 @SpringBootApplication
 public class GeovoteApplication {
@@ -23,40 +24,13 @@ public class GeovoteApplication {
 
 
 		DistrictService  districtService = container.getBean(DistrictService.class);
-
+		VoterService  voterService = container.getBean(VoterService.class);
 		
-		Voter vo1 = new Voter("VOTER_1", "Didier Nkalla", "Douala", "M");
-		Voter vo2 = new Voter("VOTER_2", "Felicien Fotio", "Dschang", "M");
-		Voter vo3 = new Voter("VOTER_3", "Megan Hess", "Denver", "F");
-		Voter vo4 = new Voter("VOTER_4", "Fothe Fabrice", "Paris", "M");
-		
-		HashSet<Voter> vl1 = new HashSet<Voter>();
-		
-		vl1.add(vo1);
-		vl1.add(vo2);
-		vl1.add(vo3);
-		vl1.add(vo4);
 
 		
 		
-		
-		Voter vo5 = new Voter("VOTER_5", "Chalene Melacheo", "Touboro", "F");
-		Voter vo6 = new Voter("VOTER_6", "Didier Nkalla", "Douala", "M");
-		Voter vo7 = new Voter("VOTER_7", "Felicien Fotio", "Dschang", "M");
-		Voter vo8 = new Voter("VOTER_8", "Megan Hess", "Denver", "F");
-		
-		
-		HashSet<Voter> vl2 = new HashSet<Voter>();
-		
-		vl2.add(vo5);
-		vl2.add(vo6);
-		vl2.add(vo7);
-		vl2.add(vo8);
-		
-		
-		
-		PollingStation ps1 = new PollingStation("POLLING_STAT_1", "PS_1", "POSTA_1", vl1);
-		PollingStation ps2 = new PollingStation("POLLING_STAT_1", "PS_1", "POSTA_1", vl2);
+		PollingStation ps1 = new PollingStation("ps_1", "poll_stat_1");
+		PollingStation ps2 = new PollingStation("ps_2", "poll_stat_2");
 		
 		
 		HashSet<PollingStation> pollsta1 = new HashSet<PollingStation>();
@@ -66,7 +40,7 @@ public class GeovoteApplication {
 		
 		
 		
-		Parish p1 = new Parish("PARISH_1", "PA1", "PR1", pollsta1);
+		Parish p1 = new Parish("par_1", "parish_1", pollsta1);
 		
 		
 
@@ -75,16 +49,16 @@ public class GeovoteApplication {
 		
 		
 		
-		SubCounty subCo1 = new SubCounty("SUB_CO_1", "SC1", "SUBCO1", pa1);
+		SubCounty subCo1 = new SubCounty("sbc_1", "subcounty_1", pa1);
 		HashSet<SubCounty> subCol1 = new HashSet<SubCounty>();
 		subCol1.add(subCo1);
 		
 		
 		
-		Constituency c1 = new Constituency("CONS_1", "CO1", "CONS1", subCol1);
-		Constituency c2 = new Constituency("CONS_2", "CO1", "CONS1");
-		Constituency c3 = new Constituency("CONS_3", "CO1", "CONS1");
-		Constituency c4 = new Constituency("CONS_4", "CO1", "CONS1");
+		Constituency c1 = new Constituency("cons_1", "constituenty_1", subCol1);
+		Constituency c2 = new Constituency("cons_2", "constituenty_2");
+		Constituency c3 = new Constituency("cons_3", "constituenty_3");
+		Constituency c4 = new Constituency("cons_4", "constituenty_3");
 		
 		HashSet<Constituency> constL1 = new HashSet<Constituency>();
 		constL1.add(c1);
@@ -94,12 +68,41 @@ public class GeovoteApplication {
 		
 
 		
-		District di1 = new District("DISTRICT_1", "D1", "DIST1", constL1);
-		District di2 = new District("DISTRICT_1", "D1", "DIST1", constL1);
-		District di3 = new District("DISTRICT_1", "D1", "DIST1", constL1);
+		District di1 = new District("dist_1", "district_1", constL1);
 		
 		
 		districtService.createNewDistrict(di1);
+		
+
+		
+		
+		
+		
+
+		
+		Voter vo1 = new Voter("app_id_1","voter_1","Fotio", "Felicien","21/01/1985","M","Bonaberi", di1.retrieveBasicInfo(),c1.retrieveBasicInfo(),p1.retrieveBasicInfo(),ps1.retrieveBasicInfo(),subCo1.retrieveBasicInfo());
+		
+		Voter vo2 = new Voter("app_id_2", "voter_2", "Puepi", "Herve","21/02/1986", "M", "Bonamoussadi", di1.retrieveBasicInfo(),c1.retrieveBasicInfo(),p1.retrieveBasicInfo(),ps1.retrieveBasicInfo(),subCo1.retrieveBasicInfo());
+		
+		Voter vo3 = new Voter("app_id_3", "voter_3", "Hess", "Megan", "13/02/1990", "F", "Denver", di1.retrieveBasicInfo(),c1.retrieveBasicInfo(),p1.retrieveBasicInfo(),ps1.retrieveBasicInfo(),subCo1.retrieveBasicInfo());
+		
+		Voter vo4 = new Voter("app_id_4",  "voter_4", "Fothe", "Fabrice","02/11/1986",  "M", "Paris", di1.retrieveBasicInfo(),c1.retrieveBasicInfo(),p1.retrieveBasicInfo(),ps1.retrieveBasicInfo(),subCo1.retrieveBasicInfo());
+		
+		
+		
+
+		voterService.createNewVoter(vo1);
+		voterService.createNewVoter(vo2);
+		voterService.createNewVoter(vo3);
+		voterService.createNewVoter(vo4);
+		
+		
+		
+/*		Voter vo5 = new Voter("VOTER_5", "Chalene Melacheo", "Touboro", "F");
+		Voter vo6 = new Voter("VOTER_6", "Didier Nkalla", "Douala", "M");
+		Voter vo7 = new Voter("VOTER_7", "Felicien Fotio", "Dschang", "M");
+		Voter vo8 = new Voter("VOTER_8", "Megan Hess", "Denver", "F");*/
+
 
 	}
 }

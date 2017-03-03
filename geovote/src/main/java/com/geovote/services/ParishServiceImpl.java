@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.geovote.data.ParishDao;
 import com.geovote.domain.Parish;
+import com.geovote.domain.Voter;
 
 @Service
 @Transactional
@@ -25,6 +26,20 @@ public class ParishServiceImpl implements ParishService {
 	@Override
 	public void deleteExistingDistrict(Parish parishToDelete) {
 		dao.delete(parishToDelete);
+	}
+
+
+
+	@Override
+	public List<Voter> findParichesVotersByParishCode(String code) {
+		
+		return dao.getParishesVotersByParhishCode(code);
+	}
+
+	@Override
+	public Parish getParishByCode(String code) {
+		return dao.getParishByCode(code);
+
 	}
 
 	@Override

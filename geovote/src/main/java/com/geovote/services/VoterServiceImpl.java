@@ -7,7 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.geovote.data.PollingStationDao;
 import com.geovote.data.VoterDao;
+import com.geovote.domain.PollingStation;
 import com.geovote.domain.Voter;
 
 @Service
@@ -15,23 +17,44 @@ import com.geovote.domain.Voter;
 public class VoterServiceImpl implements VoterService {
 
 	@Autowired
-	private VoterDao dao;
+	private VoterDao voterDao;
+	@Autowired
+	private PollingStationDao pollingStationDao;
+	
+	
 
 	public void createNewVoter(Voter newVoter) {
-		dao.create(newVoter);
+		voterDao.create(newVoter);
 	}
 
 	public void deleteExistingVoter(Voter voterToDelete) {
-		dao.delete(voterToDelete);
+		voterDao.delete(voterToDelete);
 	}
 
 	public void updateExixstingVoter(Voter voterToUpdate) {
-		dao.update(voterToUpdate);
+		voterDao.update(voterToUpdate);
 	}
 
 	public List<Voter> retrieveAllVoters() {
 
-		return dao.getAllVoters();
+		return voterDao.getAllVoters();
+	}
+
+	@Override
+	public Voter findVoterByVoterId(String id) {
+
+		return voterDao.getVoterById(id);
+	}
+
+	@Override
+	public PollingStation findVotersPollingStation(String voterId) {
+
+		Voter foundVoter = findVoterByVoterId(voterId);
+		
+		PollingStation foundVotersPollingStation = pollingStationDao.getPollingStationByCode(foundVoter.getPollingStationInfo().getPollingStationCode());
+		
+		return foundVotersPollingStation;
+		
 	}
 
 }

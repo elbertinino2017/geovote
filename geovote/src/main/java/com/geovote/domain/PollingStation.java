@@ -1,68 +1,111 @@
 package com.geovote.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+
+import com.geovote.helper.PollingStationInfo;
 
 @Entity
 public class PollingStation {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String pollingStationId;
+	@Column(unique=true, nullable=false)
 	private String code;
-	private String name; 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="POLLING_STATION_FK_ID")
-	private Set<Voter> voters;
-	
-	
-	
-	
-	public PollingStation() {}
+	private String name;
+	private Long totalVoters;
+	private String managerName;
+	private String address;
+	private Double latitude;
+	private Double longitude;
 
+	public PollingStationInfo retrieveBasicInfo() {
 
-
-
-	public PollingStation(String pollingStationId, String code, String name, Set<Voter> voters) {
-		super();
-		this.pollingStationId = pollingStationId;
-		this.code = code;
-		this.name = name;
-		this.voters = new HashSet<Voter>(voters);
+		return new PollingStationInfo(this.code, this.name);
 	}
 
-	
-	
+	public PollingStation() {
+	}
 
-	public PollingStation(String pollingStationId, String code, String name) {
-		super();
-		this.pollingStationId = pollingStationId;
+	public PollingStation(String code, String name) {
 		this.code = code;
 		this.name = name;
-		this.voters = new HashSet<Voter>();
-
 	}
 
 
 
+	public Long getTotalVoters() {
+		return totalVoters;
+	}
+
+	public void setTotalVoters(Long totalVoters) {
+		this.totalVoters = totalVoters;
+	}
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((pollingStationId == null) ? 0 : pollingStationId.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -73,71 +116,12 @@ public class PollingStation {
 		if (getClass() != obj.getClass())
 			return false;
 		PollingStation other = (PollingStation) obj;
-		if (pollingStationId == null) {
-			if (other.pollingStationId != null)
+		if (code == null) {
+			if (other.code != null)
 				return false;
-		} else if (!pollingStationId.equals(other.pollingStationId))
+		} else if (!code.equals(other.code))
 			return false;
 		return true;
 	}
-
-
-
-
-	public String getPollingStationId() {
-		return pollingStationId;
-	}
-
-
-
-
-	public void setPollingStationId(String pollingStationId) {
-		this.pollingStationId = pollingStationId;
-	}
-
-
-
-
-	public String getCode() {
-		return code;
-	}
-
-
-
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-
-
-
-	public String getName() {
-		return name;
-	}
-
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-
-	public Set<Voter> getVoters() {
-		return voters;
-	}
-
-
-
-
-	public void setVoters(Set<Voter> voters) {
-		this.voters = voters;
-	}
-	
-	
-	
 
 }

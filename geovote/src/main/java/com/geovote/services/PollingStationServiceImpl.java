@@ -1,5 +1,7 @@
 package com.geovote.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,11 @@ public class PollingStationServiceImpl implements PollingStationService {
 	@Override
 	public void deleteExistingPollingStation(PollingStation pollingStationToDelete) {
 		dao.delete(pollingStationToDelete);
+	}
+
+	@Override
+	public List<PollingStation> retrieveAllPollingStations() {
+		return dao.allPollingStations();
 	}
 
 }

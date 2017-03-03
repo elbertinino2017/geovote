@@ -1,6 +1,8 @@
 package com.geovote.representations;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,9 +18,14 @@ public class ParishesCollectionRepresentation {
 	}
 
 	public ParishesCollectionRepresentation(List<Parish> parishes) {
-		super();
 		this.parishes = parishes;
 	}
+
+	public ParishesCollectionRepresentation(Set<Parish> parishes) {
+		this.parishes = new ArrayList<Parish>(parishes);
+	}
+
+
 
 	@XmlElement(name = "parish")
 	public List<Parish> getParishes() {

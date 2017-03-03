@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,33 +12,36 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.geovote.helper.DistrictInfo;
+
 @Entity
 public class District {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String districtId;
+	@Column(unique=true, nullable=false)
 	private String code;
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DISTRICT_FK_ID")
 	private Set<Constituency> constituencies;
 
+	public DistrictInfo retrieveBasicInfo() {
+
+		return new DistrictInfo(this.code, this.name);
+	}
+
 	public District() {
 	}
 
-	public District(String districtId, String code, String name, Set<Constituency> constituencies) {
-		super();
-		this.districtId = districtId;
+	public District(String code, String name, Set<Constituency> constituencies) {
 		this.code = code;
 		this.name = name;
 		this.constituencies = new HashSet<Constituency>(constituencies);
 	}
 
-	public District(String districtId, String code, String name) {
-		super();
-		this.districtId = districtId;
+	public District(String code, String name) {
 		this.code = code;
 		this.name = name;
 		this.constituencies = new HashSet<Constituency>();
@@ -47,7 +51,7 @@ public class District {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((districtId == null) ? 0 : districtId.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		return result;
 	}
 
@@ -60,20 +64,16 @@ public class District {
 		if (getClass() != obj.getClass())
 			return false;
 		District other = (District) obj;
-		if (districtId == null) {
-			if (other.districtId != null)
+		if (code == null) {
+			if (other.code != null)
 				return false;
-		} else if (!districtId.equals(other.districtId))
+		} else if (!code.equals(other.code))
 			return false;
 		return true;
 	}
 
-	public String getDistrictId() {
-		return districtId;
-	}
-
-	public void setDistrictId(String districtId) {
-		this.districtId = districtId;
+	public Long getId() {
+		return id;
 	}
 
 	public String getCode() {

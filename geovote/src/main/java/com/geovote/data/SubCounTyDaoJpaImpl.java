@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.geovote.domain.Parish;
 import com.geovote.domain.SubCounty;
 
 
@@ -34,6 +35,14 @@ public class SubCounTyDaoJpaImpl implements SubCountyDao {
 	public List<SubCounty> allSubCountyes() {
 		
 		return em.createQuery("select subCounty from SubCounty as subCounty", SubCounty.class).getResultList();
+	}
+
+	@Override
+	public SubCounty getSubCountyByCode(String code) {
+
+		return em.createQuery("select subCounty from SubCounty as subCounty where code=:code", SubCounty.class)
+				 .setParameter("code", code)
+				 .getSingleResult();
 	}
 
 }

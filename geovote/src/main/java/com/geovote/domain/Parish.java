@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,71 +12,57 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.geovote.helper.ParishInfo;
+
 @Entity
 public class Parish {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String parishId;
+	@Column(unique=true, nullable=false)
 	private String code;
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PARISH_FK_ID")
 	private Set<PollingStation> pollingStations;
+	
+	
+	
+	
+	
+	
+	
+	public ParishInfo retrieveBasicInfo(){
+		
+		return new ParishInfo(this.code, this.code);
+	}
 
 	public Parish() {
 	}
 
-	public Parish(String parishId, String code, String name, Set<PollingStation> pollingStations) {
-		super();
-		this.parishId = parishId;
+	public Parish(String code, String name, Set<PollingStation> pollingStations) {
 		this.code = code;
 		this.name = name;
 		this.pollingStations = new HashSet<PollingStation>(pollingStations);
 	}
 
-	public Parish(String parishId, String code, String name) {
-		super();
-		this.parishId = parishId;
+	public Parish(String code, String name) {
+
 		this.code = code;
 		this.name = name;
 		this.pollingStations = new HashSet<PollingStation>();
 
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((parishId == null) ? 0 : parishId.hashCode());
-		return result;
-	}
+	
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Parish other = (Parish) obj;
-		if (parishId == null) {
-			if (other.parishId != null)
-				return false;
-		} else if (!parishId.equals(other.parishId))
-			return false;
-		return true;
+	
+	public Long getId() {
+		return id;
 	}
-
-	public String getParishId() {
-		return parishId;
-	}
-
-	public void setParishId(String parishId) {
-		this.parishId = parishId;
-	}
+	
+	
 
 	public String getCode() {
 		return code;
@@ -101,4 +88,32 @@ public class Parish {
 		this.pollingStations = pollingStations;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Parish other = (Parish) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		return true;
+	}
+
+	
+	
+	
 }

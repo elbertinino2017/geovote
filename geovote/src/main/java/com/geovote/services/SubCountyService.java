@@ -12,4 +12,6 @@ public interface SubCountyService {
 
 	public List<SubCounty> retrieveAllSubCounties();
 
+	public SubCounty findSubCountyByCode(String code);
+
 }
