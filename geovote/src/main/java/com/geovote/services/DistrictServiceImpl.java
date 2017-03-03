@@ -1,5 +1,7 @@
 package com.geovote.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,12 @@ public class DistrictServiceImpl implements DistrictService {
 	public void deleteExistingDistrict(District districtToDelete) {
 
 		dao.delete(districtToDelete);
+	}
+
+	@Override
+	public List<District> retrieveAllDistricts() {
+
+		return dao.allDistricts();
 	}
 
 }

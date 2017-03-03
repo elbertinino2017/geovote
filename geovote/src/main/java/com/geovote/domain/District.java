@@ -13,17 +13,20 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class District {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String districtId;
 	private String code;
-	private String name; 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="DISTRICT_FK_ID")
+	private String name;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "DISTRICT_FK_ID")
 	private Set<Constituency> constituencies;
-	
+
+	public District() {
+	}
+
 	public District(String districtId, String code, String name, Set<Constituency> constituencies) {
 		super();
 		this.districtId = districtId;
@@ -31,9 +34,6 @@ public class District {
 		this.name = name;
 		this.constituencies = new HashSet<Constituency>(constituencies);
 	}
-	
-	
-	
 
 	public District(String districtId, String code, String name) {
 		super();
@@ -42,9 +42,6 @@ public class District {
 		this.name = name;
 		this.constituencies = new HashSet<Constituency>();
 	}
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -70,10 +67,37 @@ public class District {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
+
+	public String getDistrictId() {
+		return districtId;
+	}
+
+	public void setDistrictId(String districtId) {
+		this.districtId = districtId;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<Constituency> getConstituencies() {
+		return constituencies;
+	}
+
+	public void setConstituencies(Set<Constituency> constituencies) {
+		this.constituencies = constituencies;
+	}
 
 }

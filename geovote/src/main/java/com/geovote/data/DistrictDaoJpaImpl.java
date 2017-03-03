@@ -1,5 +1,7 @@
 package com.geovote.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -26,6 +28,13 @@ public class DistrictDaoJpaImpl implements DistrictDao{
 		
 		em.remove(district);
 		
+	}
+
+	@Override
+	public List<District> allDistricts() {
+
+		return em.createQuery("select district from District as district", District.class)
+				.getResultList();
 	}
 
 }

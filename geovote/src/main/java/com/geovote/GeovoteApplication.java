@@ -82,9 +82,9 @@ public class GeovoteApplication {
 		
 		
 		Constituency c1 = new Constituency("CONS_1", "CO1", "CONS1", subCol1);
-		Constituency c2 = new Constituency("CONS_1", "CO1", "CONS1");
-		Constituency c3 = new Constituency("CONS_1", "CO1", "CONS1");
-		Constituency c4 = new Constituency("CONS_1", "CO1", "CONS1");
+		Constituency c2 = new Constituency("CONS_2", "CO1", "CONS1");
+		Constituency c3 = new Constituency("CONS_3", "CO1", "CONS1");
+		Constituency c4 = new Constituency("CONS_4", "CO1", "CONS1");
 		
 		HashSet<Constituency> constL1 = new HashSet<Constituency>();
 		constL1.add(c1);
@@ -95,6 +95,8 @@ public class GeovoteApplication {
 
 		
 		District di1 = new District("DISTRICT_1", "D1", "DIST1", constL1);
+		District di2 = new District("DISTRICT_1", "D1", "DIST1", constL1);
+		District di3 = new District("DISTRICT_1", "D1", "DIST1", constL1);
 		
 		
 		districtService.createNewDistrict(di1);
