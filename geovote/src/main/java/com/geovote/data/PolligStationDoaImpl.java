@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.geovote.domain.PollingStation;
+import com.geovote.domain.Voter;
 
 @Repository
 public class PolligStationDoaImpl implements PollingStationDao {
@@ -40,11 +41,11 @@ public class PolligStationDoaImpl implements PollingStationDao {
 	}
 
 	@Override
-	public PollingStation getPollingStationByCode(String pollingStationCode) {
+	public PollingStation getPollingStationByCode(String code) {
 
 		PollingStation pollingStation = em.createQuery(
-				"select pollingStation from PollingStation as pollingStation where pollingStation.code =:pollingStationCode",
-				PollingStation.class).setParameter("pollingStationCode", pollingStationCode).getSingleResult();
+				"select pollingStation from PollingStation as pollingStation where pollingStation.code =:code",
+				PollingStation.class).setParameter("code", code).getSingleResult();
 
 		return pollingStation;
 	}
@@ -53,6 +54,26 @@ public class PolligStationDoaImpl implements PollingStationDao {
 	public void update(PollingStation pollingStationToUpdate) {
 
 		em.merge(pollingStationToUpdate);
+	}
+
+	@Override
+	public List<Voter> getPollingStationsVoters(String code) {
+
+		List<Voter> pollingStationsVoters = em
+				.createQuery("select voter from Voter as voter where voter.pollingStationInfo.pollingStationCode =:code", Voter.class)
+				.setParameter("code", code)
+				.getResultList();
+		
+		return pollingStationsVoters;
+	}
+
+	@Override
+	public Long countPollingStationsVoters(String code) {
+		
+		return  em.createQuery("select count(voter.id) from Voter as voter where voter.pollingStationInfo.pollingStationCode =:code", Long.class)
+				.setParameter("code", code)
+				.getSingleResult();
+	
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.geovote.data.PollingStationDao;
 import com.geovote.domain.PollingStation;
+import com.geovote.domain.Voter;
 
 
 @Service
@@ -37,6 +38,24 @@ public class PollingStationServiceImpl implements PollingStationService {
 	public void updatePollingStation(PollingStation pollingStationToUpdate) {
 
 		dao.update(pollingStationToUpdate);
+	}
+
+	@Override
+	public PollingStation findPollingStationByCode(String code) {
+		
+		return dao.getPollingStationByCode(code);
+	}
+
+	@Override
+	public List<Voter> findPollingStationsVoters(String code) {
+
+		return dao.getPollingStationsVoters(code);
+	}
+
+	@Override
+	public Long countPollingStationsVoters(String code) {
+		
+		 return dao.countPollingStationsVoters(code);
 	}
 
 }

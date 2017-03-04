@@ -3,6 +3,7 @@ package com.geovote.services;
 import java.util.List;
 
 import com.geovote.domain.PollingStation;
+import com.geovote.domain.Voter;
 
 public interface PollingStationService {
 	
@@ -10,5 +11,8 @@ public interface PollingStationService {
 	public void deleteExistingPollingStation(PollingStation pollingStationToDelete);
 	public List<PollingStation> retrieveAllPollingStations();
 	public void updatePollingStation(PollingStation pollingStationToUpdate);
+	public PollingStation findPollingStationByCode(String code);
+	public List<Voter> findPollingStationsVoters(String code);
+	public Long countPollingStationsVoters(String code);
 
 }

@@ -36,7 +36,13 @@ public class PollingStation {
 		this.name = name;
 	}
 
-
+	public PollingStation(String code, String name, Double latitude, Double longitude) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
 	public Long getTotalVoters() {
 		return totalVoters;
