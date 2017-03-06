@@ -18,13 +18,13 @@ public class Theme {
 	private String code;
 	private String name;
 	@Embedded
-	private Poids poids;
+	private Weight poids;
 	
 	public Theme() {
 
 	}
 
-	public Theme(String code, String name, Poids poids) {
+	public Theme(String code, String name, Weight poids) {
 		this.code = code;
 		this.name = name;
 		this.poids = poids;
@@ -46,11 +46,11 @@ public class Theme {
 		this.name = name;
 	}
 
-	public Poids getPoids() {
+	public Weight getPoids() {
 		return poids;
 	}
 
-	public void setPoids(Poids poids) {
+	public void setPoids(Weight poids) {
 		this.poids = poids;
 	}
 

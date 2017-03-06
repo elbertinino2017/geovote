@@ -55,6 +55,14 @@ public class VoterDaoJpaImpl implements VoterDao {
 				 .getResultList();
 	}
 
+	@Override
+	public Voter getVoterByApplicantId(String applicantId) {
+		
+		return  em.createQuery("select voter from Voter as voter where voter.applicantId=:applicantId",Voter.class)
+				 .setParameter("applicantId", applicantId)
+				 .getSingleResult();
+	}
+
 
 
 

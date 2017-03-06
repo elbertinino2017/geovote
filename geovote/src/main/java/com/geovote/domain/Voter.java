@@ -31,6 +31,7 @@ public class Voter {
 	private String sex;
 	private String village;
 	private String picturePath;
+	private String expiryDate;
 	@Embedded
 	private DistrictInfo districtInfo;
 	@Embedded
@@ -61,6 +62,8 @@ public class Voter {
 		this.parishInfo = parishInfo;
 		this.pollingStationInfo = pollingStationInfo;
 		this.subCountyInfo = subCountyInfo;
+		this.picturePath = "images/logo.png";
+		this.expiryDate = "2015/2016";
 	}
 
 	// get and set
@@ -122,6 +125,15 @@ public class Voter {
 
 	public void setPicturePath(String picturePath) {
 		this.picturePath = picturePath;
+	}
+
+
+	public String getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(String expiryDate) {
+		this.expiryDate = expiryDate;
 	}
 
 	public String getSex() {

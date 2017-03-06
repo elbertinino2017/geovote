@@ -18,6 +18,8 @@ public interface VoterDao {
 		
 	public List<Voter> getVoterByName(String name);
 
+	public Voter getVoterByApplicantId(String applicantId);
+
 	
 	
 

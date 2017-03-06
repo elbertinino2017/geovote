@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.geovote.helper.CandidateID;
+
 @Entity
 @XmlRootElement
 public class Candidate {
@@ -15,6 +17,14 @@ public class Candidate {
 	private Long id;
 	private String name;
 	private String candidateId;
+	
+	
+	
+	
+	public CandidateID retrieveBasicInfo(){
+		
+		return new CandidateID(this.candidateId, this.name);
+	}
 	
 	public String getName() {
 		return name;

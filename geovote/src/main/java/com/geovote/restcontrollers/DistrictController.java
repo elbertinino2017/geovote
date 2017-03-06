@@ -20,6 +20,8 @@ public class DistrictController {
 
 	@RequestMapping(value = "/districts", method = RequestMethod.GET)
 	public DistrictCollectionRepresentation allDistricts() {
+		
+				
 		List<District> allDistricts = districtService.retrieveAllDistricts();
 
 		return new DistrictCollectionRepresentation(allDistricts);

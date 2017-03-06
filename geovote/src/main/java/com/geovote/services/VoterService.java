@@ -12,5 +12,8 @@ public interface VoterService {
 	public void updateExixstingVoter(Voter voterToUpdate);
 	public List<Voter> retrieveAllVoters();
 	public Voter findVoterByVoterId(String voterId);
-	public PollingStation findVotersPollingStation(String voterid);
+	public Voter findVoterByApplicantId(String voterId);
+	public PollingStation findVotersPollingStationByVoterId(String voterid);
+	public PollingStation findVotersPollingStationByApplicantId(String voterid);
+
 }

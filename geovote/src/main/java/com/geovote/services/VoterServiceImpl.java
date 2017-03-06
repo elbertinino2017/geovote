@@ -41,13 +41,21 @@ public class VoterServiceImpl implements VoterService {
 	}
 
 	@Override
-	public Voter findVoterByVoterId(String id) {
+	public Voter findVoterByVoterId(String voterId) {
 
-		return voterDao.getVoterById(id);
+		return voterDao.getVoterById(voterId);
+	}
+	
+	@Override
+	public Voter findVoterByApplicantId(String applicantId) {
+		
+		return voterDao.getVoterByApplicantId(applicantId);
+
 	}
 
+
 	@Override
-	public PollingStation findVotersPollingStation(String voterId) {
+	public PollingStation findVotersPollingStationByVoterId(String voterId) {
 
 		Voter foundVoter = findVoterByVoterId(voterId);
 		
@@ -56,5 +64,20 @@ public class VoterServiceImpl implements VoterService {
 		return foundVotersPollingStation;
 		
 	}
+
+	@Override
+	public PollingStation findVotersPollingStationByApplicantId(String applicantId) {
+		
+		Voter foundVoter = findVoterByApplicantId(applicantId);
+		
+		PollingStation foundVotersPollingStation = pollingStationDao.getPollingStationByCode(foundVoter.getPollingStationInfo().getPollingStationCode());
+		
+		return foundVotersPollingStation;
+		
+	}
+
+
+	
+
 
 }

@@ -3,15 +3,15 @@ package com.geovote.domain;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Poids {
+public class Weight {
 
 	private Double quantity;
 
-	public Poids() {
+	public Weight() {
 
 	}
 
-	public Poids(Double quantity) {
+	public Weight(Double quantity) {
 		this.quantity = quantity;
 	}
 
