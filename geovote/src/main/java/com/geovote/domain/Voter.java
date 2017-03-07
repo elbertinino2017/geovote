@@ -1,6 +1,7 @@
 package com.geovote.domain;
 
 import javax.persistence.Column;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -4,6 +4,8 @@ import java.util.HashSet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.geovote.domain.Constituency;
@@ -16,7 +18,15 @@ import com.geovote.services.DistrictService;
 import com.geovote.services.VoterService;
 
 @SpringBootApplication
-public class GeovoteApplication {
+public class GeovoteApplication extends SpringBootServletInitializer{
+	
+	
+	
+	
+	@Override
+	protected SpringApplicationBuilder  configure(SpringApplicationBuilder application){
+		return application.sources(GeovoteApplication.class);
+	}
 
 	public static void main(String[] args) {
 
