@@ -1,4 +1,4 @@
-package com.geovote;
+package com.geovote.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -19,6 +19,8 @@ public class CandidateWeight {
 	private CandidateID candidateID;
 	@Embedded
 	private ElectionInfo electionInfo;
+	@Embedded
+	private ThemePercetage themePercetages;
 	
 
 }
