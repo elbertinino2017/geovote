@@ -2,8 +2,8 @@ package com.geovote.data;
 
 import java.util.List;
 
-import com.geovote.domain.Parish;
-import com.geovote.domain.Voter;
+import com.geovote.context.administrative.domain.Parish;
+import com.geovote.context.administrative.domain.Voter;
 
 public interface ParishDao {
 	

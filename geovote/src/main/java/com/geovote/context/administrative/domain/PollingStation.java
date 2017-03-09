@@ -1,4 +1,4 @@
-package com.geovote.domain;
+package com.geovote.context.administrative.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +14,11 @@ public class PollingStation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(unique=true, nullable=false)
+	@Column(unique = true, nullable = false)
 	private String code;
 	private String name;
 	private Long totalVoters;
+	private Long currentVotes;
 	private String managerName;
 	private String address;
 	private Double latitude;
@@ -26,6 +27,11 @@ public class PollingStation {
 	public PollingStationInfo retrieveBasicInfo() {
 
 		return new PollingStationInfo(this.code, this.name);
+	}
+
+	public void updateCurrentVotes() {
+
+		this.currentVotes = this.currentVotes - 1;
 	}
 
 	public PollingStation() {
@@ -40,6 +46,19 @@ public class PollingStation {
 		super();
 		this.code = code;
 		this.name = name;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public PollingStation(String code, String name, Long totalVoters, Long currentVotes, String managerName,
+			String address, Double latitude, Double longitude) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.totalVoters = totalVoters;
+		this.currentVotes = currentVotes;
+		this.managerName = managerName;
+		this.address = address;
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -95,7 +114,6 @@ public class PollingStation {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	
 
 	public String getAddress() {
 		return address;
@@ -103,6 +121,14 @@ public class PollingStation {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Long getCurrentVotes() {
+		return currentVotes;
+	}
+
+	public void setCurrentVotes(Long currentVotes) {
+		this.currentVotes = currentVotes;
 	}
 
 	@Override
@@ -136,8 +162,5 @@ public class PollingStation {
 				+ ", managerName=" + managerName + ", address=" + address + ", latitude=" + latitude + ", longitude="
 				+ longitude + "]";
 	}
-	
-	
-	
 
 }

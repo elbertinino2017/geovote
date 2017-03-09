@@ -1,4 +1,4 @@
-package com.geovote.domain;
+package com.geovote.context.administrative.domain;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import com.geovote.helper.SubCountyInfo;
+import com.geovote.helper.DistrictInfo;
 
 @Entity
-public class SubCounty {
+public class District {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,28 +25,32 @@ public class SubCounty {
 	private String code;
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name = "SUB_COUNTY_FK_ID")
-	private Set<Parish> parishes;
+	@JoinColumn(name = "DISTRICT_FK_ID")
+	private Set<Constituency> constituencies;
+	
+	
+	
+	
+	//Business methods
 
-	public SubCountyInfo retrieveBasicInfo() {
+	public DistrictInfo retrieveBasicInfo() {
 
-		return new SubCountyInfo(this.code, this.name);
+		return new DistrictInfo(this.code, this.name);
 	}
 
-	public SubCounty() {
+	public District() {
 	}
 
-	public SubCounty(String code, String name, Set<Parish> parishes) {
+	public District(String code, String name, Set<Constituency> constituencies) {
 		this.code = code;
 		this.name = name;
-		this.parishes = new HashSet<Parish>(parishes);
+		this.constituencies = new HashSet<Constituency>(constituencies);
 	}
 
-	public SubCounty(String code, String name) {
+	public District(String code, String name) {
 		this.code = code;
 		this.name = name;
-		this.parishes = new HashSet<Parish>();
-
+		this.constituencies = new HashSet<Constituency>();
 	}
 
 	@Override
@@ -65,7 +69,7 @@ public class SubCounty {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SubCounty other = (SubCounty) obj;
+		District other = (District) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;
@@ -94,12 +98,12 @@ public class SubCounty {
 		this.name = name;
 	}
 
-	public Set<Parish> getParishes() {
-		return parishes;
+	public Set<Constituency> getConstituencies() {
+		return constituencies;
 	}
 
-	public void setParishes(Set<Parish> parishes) {
-		this.parishes = parishes;
+	public void setConstituencies(Set<Constituency> constituencies) {
+		this.constituencies = constituencies;
 	}
 
 }

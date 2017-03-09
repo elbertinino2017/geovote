@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.geovote.domain.Parish;
-import com.geovote.domain.Voter;
+import com.geovote.context.administrative.domain.Parish;
+import com.geovote.context.administrative.domain.Voter;
 import com.geovote.representations.ParishesCollectionRepresentation;
 import com.geovote.representations.PollingStationCollectionRepresentation;
 import com.geovote.services.ParishService;

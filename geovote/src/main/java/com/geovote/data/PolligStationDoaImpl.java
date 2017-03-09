@@ -7,8 +7,8 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.geovote.domain.PollingStation;
-import com.geovote.domain.Voter;
+import com.geovote.context.administrative.domain.PollingStation;
+import com.geovote.context.administrative.domain.Voter;
 
 @Repository
 public class PolligStationDoaImpl implements PollingStationDao {

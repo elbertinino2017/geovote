@@ -1,14 +1,20 @@
-package com.geovote.domain;
+package com.geovote.context.administrative.domain;
+
+import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
-
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.geovote.context.election.domain.Vote;
 import com.geovote.helper.ConstituencyInfo;
 import com.geovote.helper.DistrictInfo;
 import com.geovote.helper.ParishInfo;
@@ -28,11 +34,13 @@ public class Voter {
 	private String voterNumber;
 	private String surname;
 	private String othernames;
-	private String dob;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dob;
 	private String sex;
 	private String village;
 	private String picturePath;
-	private String expiryDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date expiryDate;
 	@Embedded
 	private DistrictInfo districtInfo;
 	@Embedded
@@ -43,13 +51,21 @@ public class Voter {
 	private PollingStationInfo pollingStationInfo;
 	@Embedded
 	private SubCountyInfo subCountyInfo;
+	@OneToMany(mappedBy="voter")
+	private Set<Vote> vote;
+	
+	
+	
+	
+
 
 	public Voter() {
 	}
 
-	public Voter(String applicantId, String voterNumber, String surname, String othernames, String dob, String sex,
-			String village, DistrictInfo districtInfo, ConstituencyInfo constituencyInfo, ParishInfo parishInfo,
-			PollingStationInfo pollingStationInfo, SubCountyInfo subCountyInfo) {
+	public Voter(String applicantId, String voterNumber, String surname, String othernames, Date dob,
+			String sex, String village, String picturePath, Date expiryDate, DistrictInfo districtInfo,
+			ConstituencyInfo constituencyInfo, ParishInfo parishInfo, PollingStationInfo pollingStationInfo,
+			SubCountyInfo subCountyInfo, Set<Vote> vote) {
 		super();
 		this.applicantId = applicantId;
 		this.voterNumber = voterNumber;
@@ -58,19 +74,17 @@ public class Voter {
 		this.dob = dob;
 		this.sex = sex;
 		this.village = village;
+		this.picturePath = picturePath;
+		this.expiryDate = expiryDate;
 		this.districtInfo = districtInfo;
 		this.constituencyInfo = constituencyInfo;
 		this.parishInfo = parishInfo;
 		this.pollingStationInfo = pollingStationInfo;
 		this.subCountyInfo = subCountyInfo;
-		this.picturePath = "images/logo.png";
-		this.expiryDate = "2015/2016";
+		this.vote = vote;
 	}
 
-	// get and set
-	public Long getId() {
-		return id;
-	}
+
 
 	public String getApplicantId() {
 		return applicantId;
@@ -104,12 +118,20 @@ public class Voter {
 		this.othernames = othernames;
 	}
 
-	public String getDob() {
+	public Date getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public String getVillage() {
@@ -128,21 +150,12 @@ public class Voter {
 		this.picturePath = picturePath;
 	}
 
-
-	public String getExpiryDate() {
+	public Date getExpiryDate() {
 		return expiryDate;
 	}
 
-	public void setExpiryDate(String expiryDate) {
+	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 
 	public DistrictInfo getDistrictInfo() {
@@ -185,37 +198,14 @@ public class Voter {
 		this.subCountyInfo = subCountyInfo;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((applicantId == null) ? 0 : applicantId.hashCode());
-		result = prime * result + ((voterNumber == null) ? 0 : voterNumber.hashCode());
-		return result;
+	public Set<Vote> getVote() {
+		return vote;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Voter other = (Voter) obj;
-		if (applicantId == null) {
-			if (other.applicantId != null)
-				return false;
-		} else if (!applicantId.equals(other.applicantId))
-			return false;
-		if (voterNumber == null) {
-			if (other.voterNumber != null)
-				return false;
-		} else if (!voterNumber.equals(other.voterNumber))
-			return false;
-		return true;
+	public void setVote(Set<Vote> vote) {
+		this.vote = vote;
 	}
 
 	
-
+	
 }

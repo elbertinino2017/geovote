@@ -2,7 +2,7 @@ package com.geovote.data;
 
 import java.util.List;
 
-import com.geovote.domain.District;
+import com.geovote.context.administrative.domain.District;
 
 public interface DistrictDao {
 	

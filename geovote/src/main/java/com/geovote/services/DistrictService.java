@@ -2,7 +2,7 @@ package com.geovote.services;
 
 import java.util.List;
 
-import com.geovote.domain.District;
+import com.geovote.context.administrative.domain.District;
 
 public interface DistrictService {
 	

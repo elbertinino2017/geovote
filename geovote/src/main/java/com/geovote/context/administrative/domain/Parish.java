@@ -1,55 +1,69 @@
-package com.geovote.domain;
+package com.geovote.context.administrative.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.geovote.helper.ParishInfo;
 
 @Entity
-@XmlRootElement
-public class Election {
+public class Parish {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(unique=true, nullable=false)
 	private String code;
 	private String name;
-	private String date;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ELECTION_FK_ID")
-	private Set<Candidate> candidates;
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<Theme> themes;
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name = "PARISH_FK_ID")
+	private Set<PollingStation> pollingStations;
 	
-	public Election(){
+	
+	
+	
+	
+	
+	
+	public ParishInfo retrieveBasicInfo(){
 		
+		return new ParishInfo(this.code, this.code);
+	}
+
+	public Parish() {
+	}
+
+	public Parish(String code, String name, Set<PollingStation> pollingStations) {
+		this.code = code;
+		this.name = name;
+		this.pollingStations = new HashSet<PollingStation>(pollingStations);
+	}
+
+	public Parish(String code, String name) {
+
+		this.code = code;
+		this.name = name;
+		this.pollingStations = new HashSet<PollingStation>();
+
+	}
+
+	
+
+	
+	public Long getId() {
+		return id;
 	}
 	
 	
-
-	public Election(String code, String name, String date) {
-		this.code = code;
-		this.name = name;
-		this.date = date;
-	}
-
-
-
-	public Election(String code, String name, String date, Set<Candidate> candidates, Set<Theme> themes) {
-		this.code = code;
-		this.name = name;
-		this.date = date;
-		this.candidates = candidates;
-		this.themes = themes;
-	}
-
-
 
 	public String getCode() {
 		return code;
@@ -67,35 +81,13 @@ public class Election {
 		this.name = name;
 	}
 
-	public String getDate() {
-		return date;
+	public Set<PollingStation> getPollingStations() {
+		return pollingStations;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setPollingStations(Set<PollingStation> pollingStations) {
+		this.pollingStations = pollingStations;
 	}
-
-	public Set<Candidate> getCandidates() {
-		return candidates;
-	}
-
-	public void setCandidates(Set<Candidate> candidates) {
-		this.candidates = candidates;
-	}
-
-	public Set<Theme> getThemes() {
-		return themes;
-	}
-
-	public void setThemes(Set<Theme> themes) {
-		this.themes = themes;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -105,8 +97,6 @@ public class Election {
 		return result;
 	}
 
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -115,7 +105,7 @@ public class Election {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Election other = (Election) obj;
+		Parish other = (Parish) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;
@@ -123,8 +113,8 @@ public class Election {
 			return false;
 		return true;
 	}
-	
-	
-	
 
+	
+	
+	
 }

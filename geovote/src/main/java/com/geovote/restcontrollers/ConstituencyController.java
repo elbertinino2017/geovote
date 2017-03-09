@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.geovote.domain.Constituency;
+import com.geovote.context.administrative.domain.Constituency;
 import com.geovote.representations.ConstituencyCollectionRepresentation;
 import com.geovote.services.ConstituencyService;
 

@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.geovote.domain.PollingStation;
+import com.geovote.context.administrative.domain.PollingStation;
 
 @XmlRootElement(name = "pollingStations")
 public class PollingStationCollectionRepresentation {

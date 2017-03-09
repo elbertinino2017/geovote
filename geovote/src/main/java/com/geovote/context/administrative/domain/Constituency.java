@@ -1,4 +1,4 @@
-package com.geovote.domain;
+package com.geovote.context.administrative.domain;
 
 import java.util.HashSet;
 import java.util.Set;

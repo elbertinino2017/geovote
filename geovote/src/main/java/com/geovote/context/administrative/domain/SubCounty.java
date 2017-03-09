@@ -1,4 +1,4 @@
-package com.geovote.domain;
+package com.geovote.context.administrative.domain;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import com.geovote.helper.ParishInfo;
+import com.geovote.helper.SubCountyInfo;
 
 @Entity
-public class Parish {
+public class SubCounty {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,68 +25,28 @@ public class Parish {
 	private String code;
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name = "PARISH_FK_ID")
-	private Set<PollingStation> pollingStations;
-	
-	
-	
-	
-	
-	
-	
-	public ParishInfo retrieveBasicInfo(){
-		
-		return new ParishInfo(this.code, this.code);
+	@JoinColumn(name = "SUB_COUNTY_FK_ID")
+	private Set<Parish> parishes;
+
+	public SubCountyInfo retrieveBasicInfo() {
+
+		return new SubCountyInfo(this.code, this.name);
 	}
 
-	public Parish() {
+	public SubCounty() {
 	}
 
-	public Parish(String code, String name, Set<PollingStation> pollingStations) {
+	public SubCounty(String code, String name, Set<Parish> parishes) {
 		this.code = code;
 		this.name = name;
-		this.pollingStations = new HashSet<PollingStation>(pollingStations);
+		this.parishes = new HashSet<Parish>(parishes);
 	}
 
-	public Parish(String code, String name) {
-
+	public SubCounty(String code, String name) {
 		this.code = code;
 		this.name = name;
-		this.pollingStations = new HashSet<PollingStation>();
+		this.parishes = new HashSet<Parish>();
 
-	}
-
-	
-
-	
-	public Long getId() {
-		return id;
-	}
-	
-	
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Set<PollingStation> getPollingStations() {
-		return pollingStations;
-	}
-
-	public void setPollingStations(Set<PollingStation> pollingStations) {
-		this.pollingStations = pollingStations;
 	}
 
 	@Override
@@ -105,7 +65,7 @@ public class Parish {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Parish other = (Parish) obj;
+		SubCounty other = (SubCounty) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;
@@ -114,7 +74,32 @@ public class Parish {
 		return true;
 	}
 
-	
-	
-	
+	public Long getId() {
+		return id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<Parish> getParishes() {
+		return parishes;
+	}
+
+	public void setParishes(Set<Parish> parishes) {
+		this.parishes = parishes;
+	}
+
 }

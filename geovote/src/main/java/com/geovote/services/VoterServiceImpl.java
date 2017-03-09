@@ -7,10 +7,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.geovote.context.administrative.domain.PollingStation;
+import com.geovote.context.administrative.domain.Voter;
 import com.geovote.data.PollingStationDao;
 import com.geovote.data.VoterDao;
-import com.geovote.domain.PollingStation;
-import com.geovote.domain.Voter;
 
 @Service
 @Transactional

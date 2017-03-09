@@ -2,7 +2,7 @@ package com.geovote.data;
 
 import java.util.List;
 
-import com.geovote.domain.Voter;
+import com.geovote.context.administrative.domain.Voter;
 
 public interface VoterDao {
 

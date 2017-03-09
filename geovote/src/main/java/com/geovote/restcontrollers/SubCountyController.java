@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.geovote.domain.SubCounty;
+import com.geovote.context.administrative.domain.SubCounty;
 import com.geovote.representations.ParishesCollectionRepresentation;
 import com.geovote.representations.SubCountyCollectionRepresentation;
 import com.geovote.services.SubCountyService;

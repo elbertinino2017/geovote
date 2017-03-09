@@ -1,11 +1,14 @@
-package com.geovote.domain;
+package com.geovote.context.election.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.geovote.context.result.domain.Weight;
 
 @Entity
 @XmlRootElement
@@ -15,19 +18,20 @@ public class Theme {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Column(unique=true, nullable=false)
 	private String code;
 	private String name;
 	@Embedded
-	private Weight poids;
+	private Weight weight;
 	
 	public Theme() {
 
 	}
 
-	public Theme(String code, String name, Weight poids) {
+	public Theme(String code, String name, Weight weight) {
 		this.code = code;
 		this.name = name;
-		this.poids = poids;
+		this.weight = weight;
 	}
 
 	public String getCode() {
@@ -46,12 +50,14 @@ public class Theme {
 		this.name = name;
 	}
 
-	public Weight getPoids() {
-		return poids;
+
+
+	public Weight getWeight() {
+		return weight;
 	}
 
-	public void setPoids(Weight poids) {
-		this.poids = poids;
+	public void setWeight(Weight weight) {
+		this.weight = weight;
 	}
 
 	public Long getId() {

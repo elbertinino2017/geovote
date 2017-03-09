@@ -2,7 +2,7 @@ package com.geovote.services;
 
 import java.util.List;
 
-import com.geovote.domain.SubCounty;
+import com.geovote.context.administrative.domain.SubCounty;
 
 public interface SubCountyService {
 

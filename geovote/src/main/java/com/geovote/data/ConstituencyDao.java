@@ -2,7 +2,7 @@ package com.geovote.data;
 
 import java.util.List;
 
-import com.geovote.domain.Constituency;
+import com.geovote.context.administrative.domain.Constituency;
 
 public interface ConstituencyDao {
 

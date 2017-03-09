@@ -5,7 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.geovote.domain.Voter;
+import com.geovote.context.administrative.domain.Voter;
 
 @XmlRootElement(name = "voters")
 public class VotersCollectionRepresentation {

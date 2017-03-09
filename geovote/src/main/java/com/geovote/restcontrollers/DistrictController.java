@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.geovote.domain.District;
+import com.geovote.context.administrative.domain.District;
 import com.geovote.representations.DistrictCollectionRepresentation;
 import com.geovote.services.DistrictService;
 

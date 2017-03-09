@@ -7,8 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.geovote.context.administrative.domain.District;
 import com.geovote.data.DistrictDao;
-import com.geovote.domain.District;
 
 
 @Service

@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.geovote.domain.Parish;
+import com.geovote.context.administrative.domain.Parish;
 
 @XmlRootElement(name = "parishes")
 public class ParishesCollectionRepresentation {

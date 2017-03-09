@@ -2,8 +2,8 @@ package com.geovote.services;
 
 import java.util.List;
 
-import com.geovote.domain.PollingStation;
-import com.geovote.domain.Voter;
+import com.geovote.context.administrative.domain.PollingStation;
+import com.geovote.context.administrative.domain.Voter;
 
 public interface VoterService {
 	

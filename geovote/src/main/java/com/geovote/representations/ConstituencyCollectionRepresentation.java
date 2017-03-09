@@ -5,7 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.geovote.domain.Constituency;
+import com.geovote.context.administrative.domain.Constituency;
 
 @XmlRootElement(name = "constituencies")
 public class ConstituencyCollectionRepresentation {

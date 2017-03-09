@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.geovote.domain.District;
+import com.geovote.context.administrative.domain.District;
 
 
 @Repository

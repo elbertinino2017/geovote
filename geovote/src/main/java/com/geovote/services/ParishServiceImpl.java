@@ -7,9 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.geovote.context.administrative.domain.Parish;
+import com.geovote.context.administrative.domain.Voter;
 import com.geovote.data.ParishDao;
-import com.geovote.domain.Parish;
-import com.geovote.domain.Voter;
 
 @Service
 @Transactional

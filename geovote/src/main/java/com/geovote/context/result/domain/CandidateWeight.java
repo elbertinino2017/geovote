@@ -1,4 +1,4 @@
-package com.geovote.domain;
+package com.geovote.context.result.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
