@@ -23,5 +23,13 @@ public interface ElectionService {
 	public void registerThemeForElection(String code, Theme theme);
 
 	public List<Theme> findElectionsThemes(String code);
+	
+	public Theme findElectionsThemeByCode(String electionCode, String themCode);
+
+
+	public void createCandidatesThemePercentages(String code, String candidateId, String  themeId, Double candidatePercentage);
+
+
+
 
 }

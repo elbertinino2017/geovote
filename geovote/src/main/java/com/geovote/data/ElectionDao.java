@@ -16,4 +16,7 @@ public interface ElectionDao {
 
 	public List<Theme> findElectionsThemes(String code);
 
+	public Theme findElectionsThemeByCode(String electionCode, String themCode);
+
+
 }

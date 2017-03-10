@@ -21,11 +21,14 @@ import com.geovote.context.election.domain.Candidature;
 import com.geovote.context.election.domain.Election;
 import com.geovote.context.election.domain.Theme;
 import com.geovote.context.election.domain.Vote;
+import com.geovote.context.result.domain.ThemePercentage;
 import com.geovote.data.ElectionService;
 import com.geovote.helper.VoteMessage;
 import com.geovote.representations.CandidateCollectionRepresentstion;
 import com.geovote.representations.CandidatureRepresentation;
 import com.geovote.representations.ThemeCollectionRepresentation;
+import com.geovote.representations.ThemePercentageCollectionRepresentation;
+import com.geovote.representations.ThemePercentageRepresentation;
 import com.geovote.representations.VoteRepresentation;
 import com.geovote.services.CandidateService;
 import com.geovote.services.PollingStationService;
@@ -33,10 +36,8 @@ import com.geovote.services.VoterService;
 
 @RestController
 public class ElectionController {
-	
-	
-	private final SseEmitter sseEmitter =new SseEmitter(Long.MAX_VALUE);
 
+	private final SseEmitter sseEmitter = new SseEmitter(Long.MAX_VALUE);
 
 	@Autowired
 	private ElectionService electionService;
@@ -46,102 +47,124 @@ public class ElectionController {
 	private VoterService voterService;
 	@Autowired
 	private PollingStationService pollingStationService;
-	
-	@RequestMapping(value="/elections", method=RequestMethod.POST)
-	public void createNewElection(@RequestBody Election newElection){
-		
+
+	@RequestMapping(value = "/elections", method = RequestMethod.POST)
+	public void createNewElection(@RequestBody Election newElection) {
+
 		electionService.createNewElection(newElection);
 	}
-	
-	@RequestMapping(value="/election/{code}", method=RequestMethod.GET)
-	public Election findElectionByCode(@PathVariable String code){
-		
+
+	@RequestMapping(value = "/election/{code}", method = RequestMethod.GET)
+	public Election findElectionByCode(@PathVariable String code) {
+
 		return electionService.findElectionByCode(code);
 	}
-	
-	@RequestMapping(value="/election/{code}/candidates", method=RequestMethod.GET)
-	public CandidateCollectionRepresentstion findElectionsCandidates(@PathVariable String code){
-		
+
+	@RequestMapping(value = "/election/{code}/candidates", method = RequestMethod.GET)
+	public CandidateCollectionRepresentstion findElectionsCandidates(@PathVariable String code) {
+
 		List<Candidate> electionsCandidates = electionService.findElectionsCandidates(code);
-		
+
 		return new CandidateCollectionRepresentstion(electionsCandidates);
 	}
-	
-	
-	@RequestMapping(value="/election/{code}/candidatures", method=RequestMethod.POST)
-	public void registerCandidateForElection(@PathVariable String code,  @RequestBody CandidatureRepresentation candidatureRepresention){
-		
+
+	@RequestMapping(value = "/election/{code}/candidatures", method = RequestMethod.POST)
+	public void registerCandidateForElection(@PathVariable String code,
+			@RequestBody CandidatureRepresentation candidatureRepresention) {
+
 		Election foundElection = electionService.findElectionByCode(code);
-		
-		Candidate foundCandidate = candidateService.findCadidateByCode(candidatureRepresention.getCandidateRegistrationId());
-		
-		Candidature candidature = new Candidature(foundCandidate, foundElection, new Date(),candidatureRepresention.getCandidateSignature());
-		
-		electionService.registerCandidateForElection(code, candidature);;
-		
+
+		Candidate foundCandidate = candidateService
+				.findCadidateByCode(candidatureRepresention.getCandidateRegistrationId());
+
+		Candidature candidature = new Candidature(foundCandidate, foundElection, new Date(),
+				candidatureRepresention.getCandidateSignature());
+
+		electionService.registerCandidateForElection(code, candidature);
+		;
+
 	}
-	
-	@RequestMapping(value="/election/{code}/votes", method=RequestMethod.POST)
-	public void registerVoteForElection(@PathVariable String code,  @RequestBody VoteRepresentation voteRepresentation){
-		
+
+	@RequestMapping(value = "/election/{code}/candidates/{candidateId}/themepercentages", method = RequestMethod.GET)
+	public ThemePercentageCollectionRepresentation findCandidatesThemePercentages(@PathVariable String code,
+			@PathVariable String candidateId) {
+
+		List<ThemePercentage> candidatesThemePercentages = candidateService.findCandidatesThemePercentages(code,
+				candidateId);
+
+		return new ThemePercentageCollectionRepresentation(candidatesThemePercentages);
+	}
+
+	@RequestMapping(value = "/election/{code}/candidates/{candidateId}/themepercentages", method = RequestMethod.POST)
+	public void createCandidatesThemePercentages(@PathVariable String code, @PathVariable String candidateId,
+			@RequestBody ThemePercentageRepresentation themePercentage) {
+
+		String themeId = themePercentage.getThemeId();
+		Double candidatePercentage = themePercentage.getPercentage();
+
+		electionService.createCandidatesThemePercentages(code, candidateId, themeId, candidatePercentage);
+
+	}
+
+	@RequestMapping(value = "/election/{code}/votes", method = RequestMethod.POST)
+	public void registerVoteForElection(@PathVariable String code, @RequestBody VoteRepresentation voteRepresentation) {
+
 		Election foundElection = electionService.findElectionByCode(code);
-		
+
 		Voter foundVoter = voterService.findVoterByVoterId(voteRepresentation.getVoterId());
 
 		Vote vote = new Vote(foundVoter, foundElection, new Date(), "Herve");
-		
+
 		electionService.registerVoteForElection(code, vote);
-		
-		PollingStation votersPollingStation = pollingStationService.findPollingStationByCode(vote.getVoter().getPollingStationInfo().getPollingStationCode());
-		
-		
-		VoteMessage message = new VoteMessage(foundElection.getCode(), foundVoter.getDistrictInfo().getDistrictCode(), foundVoter.getConstituencyInfo().getConstituencyCode(), 
-				foundVoter.getSubCountyInfo().getSubCountyCode(), foundVoter.getParishInfo().getParishCode(), foundVoter.getPollingStationInfo().getPollingStationCode(), votersPollingStation.getCurrentVotes());
-		
-		
+
+		PollingStation votersPollingStation = pollingStationService
+				.findPollingStationByCode(vote.getVoter().getPollingStationInfo().getPollingStationCode());
+
+		VoteMessage message = new VoteMessage(foundElection.getCode(), foundVoter.getDistrictInfo().getDistrictCode(),
+				foundVoter.getConstituencyInfo().getConstituencyCode(),
+				foundVoter.getSubCountyInfo().getSubCountyCode(), foundVoter.getParishInfo().getParishCode(),
+				foundVoter.getPollingStationInfo().getPollingStationCode(), votersPollingStation.getCurrentVotes());
 
 		try {
-			
-						
+
 			sseEmitter.send(SseEmitter.event().name("newVoteEntry").data(message));
-			
-			
+			// sseEmitter.send(message, MediaType.APPLICATION_JSON_UTF8);
+			// sseEmitter.send(message);
+
 		} catch (IOException e) {
-			
 
 		}
 
-		
+	}
 
-		
-	}
-	
-	@RequestMapping(value="/election/{code}/themes", method=RequestMethod.POST)
-	public void registerThemeForElection(@PathVariable String code,  @RequestBody Theme theme){
-		
+	@RequestMapping(value = "/election/{code}/themes", method = RequestMethod.POST)
+	public void registerThemeForElection(@PathVariable String code, @RequestBody Theme theme) {
+
 		electionService.registerThemeForElection(code, theme);
-		
+
 	}
-	
-	@RequestMapping(value="/election/{code}/themes", method=RequestMethod.GET)
-	public ThemeCollectionRepresentation findElectionsThems(@PathVariable String code){
-		
+
+	@RequestMapping(value = "/election/{code}/themes", method = RequestMethod.GET)
+	public ThemeCollectionRepresentation findElectionsThems(@PathVariable String code) {
+
 		List<Theme> electionsThemes = electionService.findElectionsThemes(code);
-		
+
 		return new ThemeCollectionRepresentation(electionsThemes);
-		
+
 	}
-	
-	
-	
+
+	@RequestMapping(value = "/election/{code}/theme/{themeId}", method = RequestMethod.GET)
+	public Theme findElectionsThemeByThemId(@PathVariable String code, String themeId) {
+
+		return electionService.findElectionsThemeByCode(code, themeId);
+
+	}
+
 	@RequestMapping("/event")
-	public SseEmitter alertMeOfNewVote(HttpServletRequest request){
-				
+	public SseEmitter alertMeOfNewVote(HttpServletRequest request) {
+
 		return sseEmitter;
-		
-		
+
 	}
-	
-	
 
 }

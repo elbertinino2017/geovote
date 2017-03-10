@@ -2,6 +2,7 @@ package com.geovote.context.election.domain;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.geovote.context.result.domain.ThemePercentage;
 
 @Entity
 @XmlRootElement
@@ -20,19 +23,27 @@ public class Candidate {
 	@Column(unique = true, nullable = false)
 	private String candidateId;
 	private String name;
-	@OneToMany(mappedBy="candidate")
+	
+	@OneToMany(mappedBy="candidate", cascade=CascadeType.ALL)
 	private Set<Candidature> candidatures;
+	
+	@OneToMany(mappedBy="candidate", cascade=CascadeType.ALL)
+	private Set<ThemePercentage> themePercentages;
 
 	public Candidate() {
 
 	}
 
-	public Candidate(String candidateId, String name, Set<Candidature> registrations) {
-		super();
+
+
+	public Candidate(String candidateId, String name, Set<Candidature> candidatures,
+			Set<ThemePercentage> themePercentages) {
 		this.candidateId = candidateId;
 		this.name = name;
-		this.candidatures = registrations;
+		this.candidatures = candidatures;
+		this.themePercentages = themePercentages;
 	}
+
 
 
 	public String getCandidateId() {
@@ -57,6 +68,36 @@ public class Candidate {
 
 	public void setRegistrations(Set<Candidature> registrations) {
 		this.candidatures = registrations;
+	}
+
+
+
+	public Set<Candidature> getCandidatures() {
+		return candidatures;
+	}
+
+
+
+	public void setCandidatures(Set<Candidature> candidatures) {
+		this.candidatures = candidatures;
+	}
+
+
+
+	public Set<ThemePercentage> getThemePercentages() {
+		return themePercentages;
+	}
+
+
+
+	public void setThemePercentages(Set<ThemePercentage> themePercentages) {
+		this.themePercentages = themePercentages;
+	}
+
+
+
+	public void addThemePercentage(ThemePercentage themePercentage) {
+		this.themePercentages.add(themePercentage);
 	}
 
 	

@@ -54,15 +54,12 @@ public class GeovoteApplication extends SpringBootServletInitializer{
 		Weight w1 = new Weight();
 		Weight w2 = new Weight();
 		
-		Theme th1 = new Theme("th_id_1", "Them one", w1);
-		Theme th2 = new Theme("th_id_2", "Theme two", w2);
+
 		
-		Set<Theme> themes = new HashSet<Theme>();
-		themes.add(th1);
-		themes.add(th2);
+
 		
-		Candidate can1 = new Candidate("can_id_1", "Election candidate one", new HashSet<>());
-		Candidate can2 = new Candidate("can_id_2", "Election candidate two", new HashSet<>());
+		Candidate can1 = new Candidate("can_id_1", "Election candidate one", new HashSet<>(),new HashSet<>());
+		Candidate can2 = new Candidate("can_id_2", "Election candidate two", new HashSet<>(),new HashSet<>());
 		
 		
 		
@@ -78,7 +75,16 @@ public class GeovoteApplication extends SpringBootServletInitializer{
 		
 		Set<Candidature> registrations = new HashSet<>();
 		
-		Election newElection = new Election("el_id_1", "Election one", new Date(), themes, registrations, votes);
+		Election newElection = new Election("el_id_1", "Election one", new Date(), new HashSet<>(), registrations, votes);
+		
+		Theme th1 = new Theme("th_id_1", "Them one", w1, newElection.retrieveElectionInfo(), new HashSet<>());
+		Theme th2 = new Theme("th_id_2", "Theme two", w2, newElection.retrieveElectionInfo(), new HashSet<>());
+		
+		Set<Theme> themes = new HashSet<Theme>();
+		themes.add(th1);
+		themes.add(th2);
+		
+		newElection.setThemes(themes);
 		
 
 		Candidature can_reg1 = new Candidature(can1, newElection, new Date(),"my signature");
@@ -170,15 +176,15 @@ public class GeovoteApplication extends SpringBootServletInitializer{
 				subCo1.retrieveBasicInfo(),new HashSet<>());
 
 		Voter vo2 = new Voter("app_id_2", "voter_2", "Puepi", "Herve", new Date(), "M", "Bonamoussadi","",
-				new Date(),  di1.retrieveBasicInfo(), c1.retrieveBasicInfo(), p1.retrieveBasicInfo(), ps1.retrieveBasicInfo(),
+				new Date(),  di1.retrieveBasicInfo(), c1.retrieveBasicInfo(), p1.retrieveBasicInfo(), ps2.retrieveBasicInfo(),
 				subCo1.retrieveBasicInfo(), new HashSet<>());
 
 		Voter vo3 = new Voter("app_id_3", "voter_3", "Hess", "Megan", new Date(), "F", "Denver","",
-				new Date(),di1.retrieveBasicInfo(), c1.retrieveBasicInfo(), p1.retrieveBasicInfo(), ps3.retrieveBasicInfo(),
+				new Date(),di1.retrieveBasicInfo(), c1.retrieveBasicInfo(), p1.retrieveBasicInfo(), ps1.retrieveBasicInfo(),
 				subCo1.retrieveBasicInfo(),new HashSet<>());
 
 		Voter vo4 = new Voter("app_id_4", "voter_4", "Fothe", "Fabrice", new Date(), "M", "Paris","",
-				new Date(),di1.retrieveBasicInfo(), c1.retrieveBasicInfo(), p1.retrieveBasicInfo(), ps3.retrieveBasicInfo(),
+				new Date(),di1.retrieveBasicInfo(), c1.retrieveBasicInfo(), p1.retrieveBasicInfo(), ps1.retrieveBasicInfo(),
 				subCo1.retrieveBasicInfo(), new HashSet<>());
 
 		voterService.createNewVoter(vo1);

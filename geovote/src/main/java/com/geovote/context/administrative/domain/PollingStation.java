@@ -31,7 +31,7 @@ public class PollingStation {
 
 	public void updateCurrentVotes() {
 
-		this.currentVotes = this.currentVotes - 1;
+		this.currentVotes = this.currentVotes + 1;
 	}
 
 	public PollingStation() {

@@ -15,6 +15,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.geovote.context.result.domain.ThemePercentage;
+import com.geovote.helper.ElectionInfo;
+
 @Entity
 @XmlRootElement
 public class Election {
@@ -37,6 +40,9 @@ public class Election {
 	@OneToMany(mappedBy="election", cascade = CascadeType.ALL)
 	private Set<Vote> votes;
 	
+	@OneToMany(mappedBy="election", cascade=CascadeType.ALL)
+	private Set<ThemePercentage> themePercentages;
+	
 	
 	
 	
@@ -44,6 +50,19 @@ public class Election {
 	public void addVote(Vote vote) {
 
 		this.votes.add(vote);
+	}
+	public void addCandidate(Candidature candidature) {
+		this.candidatures.add(candidature);
+	}
+
+
+	public void addTheme(Theme theme) {
+		this.themes.add(theme);
+	}
+
+
+	public ElectionInfo retrieveElectionInfo() {
+		return new ElectionInfo(this.code, this.name);
 	}
 
 	
@@ -138,16 +157,15 @@ public class Election {
 	public void setVotes(Set<Vote> votes) {
 		this.votes = votes;
 	}
-
-
-	public void addCandidate(Candidature candidature) {
-		this.candidatures.add(candidature);
+	public Set<ThemePercentage> getThemePercentages() {
+		return themePercentages;
+	}
+	public void setThemePercentages(Set<ThemePercentage> themePercentages) {
+		this.themePercentages = themePercentages;
 	}
 
 
-	public void addTheme(Theme theme) {
-		this.themes.add(theme);
-	}
+	
 
 
 

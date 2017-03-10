@@ -47,4 +47,24 @@ public class ElectionDaoJpaImpl implements ElectionDao {
 				.getResultList();
 	}
 
+	@Override
+	public Theme findElectionsThemeByCode(String electionCode, String themCode) {
+
+		Election foundElection = em.createQuery("select election from Election as election  where election .code =:code",Election.class)
+				.setParameter("code", electionCode)
+				.getSingleResult();
+		
+		for(Theme next : foundElection.getThemes()){
+			
+			if(next.getClass().equals(themCode))
+			{
+				return next;
+			}
+		}
+		
+		return null;
+	}
+
+
+
 }
